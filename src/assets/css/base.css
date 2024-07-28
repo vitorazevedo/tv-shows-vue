@@ -1,0 +1,61 @@
+@import './font-face.css';
+@import './font-variables.css';
+@import './sizes.css';
+@import './index.css';
+@import './opacity.css';
+@import './colors-basic.css';
+@import './colors-default.css';
+
+html,
+body {
+  height: var(--size-pe-100);
+  min-height: var(--size-pe-100);
+  font: var(--font-regular) var(--size-pe-100) var(--font-family-suisse-intl);
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-black);
+  background-color: var(--color-neutral-1);
+
+  @media only screen and (prefers-color-scheme: dark) {
+    background-color: var(--color-neutral-2);
+  }
+}
+
+h1 {
+  padding: 0 0 var(--size-px-15) 0;
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-38);
+  line-height: var(--font-height-40);
+}
+
+h2 {
+  padding: var(--size-px-20) 0 var(--size-px-10) 0;
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-28);
+  line-height: var(--font-height-32);
+}
+
+h3 {
+  padding: var(--size-px-20) 0 var(--size-px-10) 0;
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-22);
+  line-height: var(--font-height-26);
+}
+
+h4 {
+  padding: var(--size-px-20) 0 var(--size-px-10) 0;
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-20);
+  line-height: var(--font-height-24);
+}
+
+p+p {
+  padding-top: var(--size-px-10);
+}
+
+b,
+strong {
+  font-weight: var(--font-bold);
+}
