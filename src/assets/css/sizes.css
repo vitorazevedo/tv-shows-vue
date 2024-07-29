@@ -1,9 +1,13 @@
 /* Media Query */
 :root {
-  --size-screen-xs: 22.5rem;  /* 360px */
-  --size-screen-sm: 37.5rem;  /* 600px */
-  --size-screen-md: 75rem;    /* 1200px */
-  --size-screen-lg: 87.5rem;  /* 1400px */
+  /* 360px */
+  --size-screen-xs: 22.5rem;
+  /* 600px */
+  --size-screen-sm: 37.5rem;
+  /* 1200px */
+  --size-screen-md: 75rem;
+  /* 1400px */
+  --size-screen-lg: 87.5rem;
 }
 
 /* Size: Percentage */
@@ -47,6 +51,8 @@
   --size-px-13: 13px;
   --size-px-14: 14px;
   --size-px-15: 15px;
+  --size-px-16: 16px;
+  --size-px-17: 17px;
   --size-px-20: 20px;
   --size-px-25: 25px;
   --size-px-30: 30px;
@@ -61,7 +67,10 @@
   --size-px-140: 140px;
   --size-px-150: 150px;
   --size-px-160: 160px;
+  --size-px-200: 200px;
+  --size-px-210: 210px;
   --size-px-250: 250px;
   --size-px-500: 500px;
+  --size-px-720: 720px;
   --size-px-800: 800px;
 }
