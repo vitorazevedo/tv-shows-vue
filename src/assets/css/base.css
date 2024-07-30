@@ -58,6 +58,7 @@ p+p {
 b,
 strong {
   font-weight: var(--font-bold);
+  color: var(--color-secondary);
 }
 
 a {
