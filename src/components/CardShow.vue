@@ -15,7 +15,10 @@ defineProps<{
   <li>
     <RouterLink :to="`/detail/${show.id}`">
       <figure>
-        <div><img v-if="show.image" :src="show.image.medium" alt="Show Image"></div>
+        <div>
+          <img v-if="show.image" :src="show.image.medium" alt="Show Image">
+          <img v-if="!show.image" src="@/assets/svg/logo.svg" alt="No Image" class="image-placeholder">
+        </div>
         <figcaption>{{ show.name }}</figcaption>
       </figure>
       <Rating :rating="show.rating" />
@@ -48,6 +51,12 @@ li {
         img {
           width: var(--size-px-210);
           transition: transform 0.3s ease-in-out;
+        }
+
+        .image-placeholder {
+          width: var(--size-px-210);
+          height: var(--size-px-295);
+          object-fit: none;
         }
       }
 
