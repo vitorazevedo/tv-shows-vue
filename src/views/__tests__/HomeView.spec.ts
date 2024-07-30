@@ -59,7 +59,7 @@ describe('HomeView', () => {
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
-    expect(fetch).toHaveBeenCalledWith('http://api.tvmaze.com/shows');
+    expect(fetch).toHaveBeenCalledWith('https://api.tvmaze.com/shows');
     expect(wrapper.vm.shows).toEqual(mockShows);
     expect(wrapper.vm.genres).toEqual(['Comedy', 'Drama']);
   });
@@ -75,7 +75,7 @@ describe('HomeView', () => {
     const wrapper = mount<HomeViewInstance>(HomeView as unknown as HomeViewInstance);
     expect(wrapper.exists()).toBe(true);
     await new Promise(process.nextTick);
-    expect(fetchSpy).toHaveBeenNthCalledWith(1, 'http://api.tvmaze.com/shows');
+    expect(fetchSpy).toHaveBeenNthCalledWith(1, 'https://api.tvmaze.com/shows');
     expect(wrapper.vm.shows).toEqual([mockShowsEndpoint[0]]);
 
     // Set up the second mock response
@@ -83,7 +83,7 @@ describe('HomeView', () => {
     await wrapper.findComponent(SearchBar).vm.$emit('search', 'SearchQuery');
     await new Promise(process.nextTick);
 
-    expect(fetchSpy).toHaveBeenNthCalledWith(2, 'http://api.tvmaze.com/search/shows?q=SearchQuery');
+    expect(fetchSpy).toHaveBeenNthCalledWith(2, 'https://api.tvmaze.com/search/shows?q=SearchQuery');
     expect(wrapper.vm.searchResults).toEqual([mockSearchEndpoint[0].show]);
 
     fetchSpy.mockRestore();

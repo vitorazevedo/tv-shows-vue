@@ -8,7 +8,7 @@ const route = useRoute();
 const show = ref<any>(null);
 
 async function fetchShow() {
-  const response = await fetch(`http://api.tvmaze.com/shows/${route.params.id}`);
+  const response = await fetch(`https://api.tvmaze.com/shows/${route.params.id}`);
   const data = await response.json();
   show.value = data;
 }

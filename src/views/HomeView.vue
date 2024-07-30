@@ -12,14 +12,14 @@ const displayedShows = computed(() => {
 });
 
 const fetchShows = async () => {
-  const response = await fetch('http://api.tvmaze.com/shows');
+  const response = await fetch('https://api.tvmaze.com/shows');
   const data = await response.json();
   shows.value = data;
 };
 
 const searchShows = async (query: string) => {
   if (query) {
-    const response = await fetch(`http://api.tvmaze.com/search/shows?q=${query}`);
+    const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
     const data = await response.json();
     searchResults.value = data.map((result: any) => result.show);
   } else {

@@ -58,7 +58,7 @@ describe('DetailViewComponent', () => {
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
-    expect(fetch).toHaveBeenCalledWith('http://api.tvmaze.com/shows/1');
+    expect(fetch).toHaveBeenCalledWith('https://api.tvmaze.com/shows/1');
     expect(wrapper.vm.show).toEqual(mockShow);
   });
 
