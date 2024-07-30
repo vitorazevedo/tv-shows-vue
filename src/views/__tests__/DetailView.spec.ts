@@ -5,16 +5,26 @@ import ArrowIcon from '@/components/icons/arrow.vue';
 import Rating from '@/components/Rating.vue';
 import { createRouter, createWebHistory, RouterLink } from 'vue-router';
 
-// Mock router setup
+const mockRoutes = [
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: DetailViewComponent,
+  },
+];
+
 const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: '/', component: { template: '<div>Home Page</div>' } }],
+  routes: mockRoutes,
 });
 
-// Mock fetch
 global.fetch = vi.fn();
 
-describe.skip('DetailViewComponent', () => {
+interface DetailViewInstance {
+  show: { id: number; name: string; genres: string[] };
+}
+
+describe('DetailViewComponent', () => {
   it('fetches show data on mount', async () => {
     const mockShow = {
       id: 1,
@@ -32,14 +42,14 @@ describe.skip('DetailViewComponent', () => {
       genres: ['Drama', 'Sci-Fi'],
     };
 
-    fetch.mockResolvedValueOnce({
-      json: async () => mockShow,
+    (fetch as any).mockResolvedValueOnce({
+      json: () => mockShow,
     });
 
-    router.push('/1');
+    router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount(DetailViewComponent, {
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance, {
       global: {
         plugins: [router],
         components: { RouterLink },
@@ -53,6 +63,29 @@ describe.skip('DetailViewComponent', () => {
   });
 
   it('renders the ArrowIcon component and back link', async () => {
+    const mockShow = {
+      id: 1,
+      name: 'Test Show',
+      summary: '<p>Test Summary</p>',
+      image: { original: 'http://example.com/image.jpg' },
+      rating: { average: 8.5 },
+      language: 'English',
+      status: 'Running',
+      runtime: 60,
+      premiered: '2022-01-01',
+      ended: null,
+      schedule: { days: ['Monday'], time: '20:00' },
+      network: { name: 'Test Network', country: { name: 'USA' } },
+      genres: ['Drama', 'Sci-Fi'],
+    };
+
+    (fetch as any).mockResolvedValueOnce({
+      json: () => mockShow,
+    });
+
+    router.push({ name: 'Detail', params: { id: '1' } });
+    await router.isReady();
+
     const wrapper = mount(DetailViewComponent, {
       global: {
         plugins: [router],
@@ -60,9 +93,10 @@ describe.skip('DetailViewComponent', () => {
       },
     });
 
+    await new Promise(process.nextTick); // Wait for the fetch to resolve
+
     const arrowIcon = wrapper.findComponent(ArrowIcon);
     expect(arrowIcon.exists()).toBe(true);
-
     const backLink = wrapper.findComponent(RouterLink);
     expect(backLink.exists()).toBe(true);
     expect(backLink.props().to).toBe('/');
@@ -85,7 +119,7 @@ describe.skip('DetailViewComponent', () => {
       genres: ['Drama', 'Sci-Fi'],
     };
 
-    fetch.mockResolvedValueOnce({
+    (fetch as any).mockResolvedValueOnce({
       json: async () => mockShow,
     });
 
