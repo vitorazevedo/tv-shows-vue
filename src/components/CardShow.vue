@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import StarIcon from '@/components/icons/star.vue';
+import Rating from './Rating.vue';
 
 defineProps<{
   show: {
@@ -18,9 +18,7 @@ defineProps<{
         <div><img v-if="show.image" :src="show.image.medium" alt="Show Image"></div>
         <figcaption>{{ show.name }}</figcaption>
       </figure>
-      <small v-if="show.rating && show.rating.average">
-        <StarIcon /> <span>{{ show.rating.average }}</span>
-      </small>
+      <Rating :rating="show.rating" />
     </RouterLink>
   </li>
 </template>
@@ -64,24 +62,10 @@ li {
     }
 
     small {
-      padding: var(--size-px-3) var(--size-px-7);
-      display: flex;
-      align-items: center;
-      gap: var(--size-px-5);
-      font-size: var(--font-size-14);
-      color: var(--color-warning);
-      background-color: rgba(0, 0, 0, 0.75);
-      border-radius: var(--size-px-7);
-
       position: absolute;
       left: var(--size-px-7);
       top: var(--size-px-7);
       z-index: var(--index-1);
-
-      svg {
-        width: var(--size-px-17);
-        padding-bottom: var(--size-px-2);
-      }
     }
   }
 
