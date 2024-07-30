@@ -6,40 +6,29 @@
     <h1>Frontend Assignment</h1>
 
     <h2>Introduction</h2>
-    <p>The purpose of this assignment is to evaluate the candidate’s familiarity with frontend technologies, programming
-      patterns and to showcase a sample of what clean and reusable code means to the candidate. This also helps in
-      understanding the candidate’s basic design knowledge.</p>
+    <p>This assignment aims to evaluate your familiarity with frontend technologies, programming patterns, and your ability to produce clean and reusable code. It will also give us insight into your basic design knowledge.</p>
 
-    <h2>Requirement</h2>
-    <p>You will use an open <a href="http://www.tvmaze.com/api" target="_blank">TV shows API</a> to create an
-      application that allows users to view lists (preferably horizontal list) of TV shows based on different genres
-      (drama, comedy, sports, etc.).</p>
-    <p>Your goal is to develop a TV show dashboard that effectively categorizes and displays shows based on their genre.
-      You are expected to create an intuitive and user-friendly UI where TV shows are not only grouped by genre but also
-      sorted according to their ratings. When a user selects a particular show from the dashboard, they should be
-      redirected to a detailed screen that provides comprehensive information about the show. To enhance user
-      experience, a search feature should also be implemented allowing users to look up tv shows by name.</p>
+    <h2>Requirements</h2>
+    <p>Utilize the open TV shows API at <a href="http://www.tvmaze.com/api" target="_blank">http://www.tvmaze.com/api</a> to create an application that allows users to view TV shows categorized by different genres (drama, comedy, sports, etc.). </p>
+    <p>Your task is to develop a TV show dashboard that effectively categorizes and displays shows based on their genre. The UI should be intuitive and user-friendly, grouping TV shows by genre and sorting them according to their ratings. When a user selects a show, they should be redirected to a detailed screen with comprehensive information about the show. Additionally, implement a search feature to allow users to look up TV shows by name.</p>
 
     <h2>Architecture</h2>
-    <p>There is no limit for this. Design your application as you wish. But make sure you will focus on clean code,
-      reusability, frontend best practices. Show us that you know how to produce top notch applications.</p>
+    <p>You have the freedom to design the application's architecture as you see fit. However, focus on clean code, reusability, and frontend best practices. Demonstrate your ability to produce top-notch applications.</p>
 
     <h2>Notes</h2>
     <ul>
-      <li>Please keep in mind that we use VueJS. Preferably, you complete this assessment using this framework.</li>
-      <li>Application must be responsive and mobile friendly</li>
-      <li>Please keep the leverage/use of scaffolding tools, boilerplate templates, plugins etc. to a minimum. We don’t
-        expect you to create things from scratch but, we also would like to see your own creation</li>
-      <li>Please create a readme file that explains your architectural decisions (E.G. why did you choose a specific
-        framework) and make sure you include instructions on how to run your solution, add details about NodeJS version
-        being used and NPM.</li>
-      <li>Please include unit tests</li>
-      <li>Please check that application is running and there are no console errors before sending it to us</li>
-      <li>Please make sure that the UI is simple yet eye-catching</li>
-      <li>Please feel free to include more features other than the few mentioned above.</li>
-      <li>You may notice there is no endpoint in the TVMaze API that cleanly returns shows by genre. However, the "Show
-        index" endpoint should contain the data you need</li>
+      <li>It is preferable to complete this assessment using <a href="https://vuejs.org/" target="_blank">Vue.js</a> framework.</li>
+      <li>Ensure the application is responsive and mobile-friendly.</li>
+      <li>Minimize the use of scaffolding tools, boilerplate templates, plugins, etc. We want to see your original work.</li>
+      <li>Create a README file that explains your architectural decisions, instructions on how to run your solution, and details about the <a href="https://nodejs.org/en" target="_blank">Node.js</a> version and <a href="https://www.npmjs.com/" target="_blank">NPM</a> used.</li>
+      <li>Include unit tests.</li>
+      <li>Verify that the application runs without console errors before submission.</li>
+      <li>Ensure the UI is simple yet visually appealing.</li>
+      <li>Feel free to add more features beyond those mentioned.</li>
+      <li>Note that there is no endpoint in the <a href="http://www.tvmaze.com/api" target="_blank">TVMaze API</a> that cleanly returns shows by genre. However, the "Show index" endpoint should contain the necessary data.</li>
     </ul>
+
+    <p>By completing this assignment, you will showcase your ability to create a well-structured, efficient, and visually appealing application, reflecting your frontend development skills and design sensibilities.</p>
   </section>
 </template>
 
@@ -47,15 +36,16 @@
 .about-view {
   p {
     color: var(--color-neutral-3);
+  }
 
-    a {
-      color: var(--color-secondary);
-      font-weight: var(--font-bold);
-    }
+  a {
+    color: var(--color-secondary);
+    font-weight: var(--font-bold);
   }
 
   ul {
     padding-left: var(--size-px-15);
+    padding-bottom: var(--size-px-20);
     list-style: disc;
     color: var(--color-neutral-3);
     display: flex;
