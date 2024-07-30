@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import ArrowIcon from '@/components/icons/arrow.vue';
+import Rating from '@/components/Rating.vue';
 
 const route = useRoute();
 const show = ref<any>(null);
@@ -19,86 +20,117 @@ onMounted(() => {
 
 <template>
   <section class="detail-view" v-if="show">
-    <RouterLink :to="`/`" class="back-button">
-      <ArrowIcon />
-      <span>Take me back home</span>
+    <RouterLink :to="`/`">
+      <ArrowIcon /><span>Back</span>
     </RouterLink>
-    <h1>{{ show.name }}</h1>
     <article>
-      <img v-if="show.image" :src="show.image.original" alt="Show Image">
-      <div>
-        <p v-html="show.summary"></p>
-        <p><strong>Genres:</strong> {{ show.genres.join(', ') }}</p>
-        <p><strong>Language:</strong> {{ show.language }}</p>
-        <p><strong>Status:</strong> {{ show.status }}</p>
-        <p><strong>Runtime:</strong> {{ show.runtime }} minutes</p>
-        <p><strong>Premiered:</strong> {{ show.premiered }}</p>
-        <p v-if="show.ended"><strong>Ended:</strong> {{ show.ended }}</p>
-        <p><strong>Schedule:</strong> {{ show.schedule.days.join(', ') }} at {{ show.schedule.time }}</p>
-        <p><strong>Rating:</strong> {{ show.rating.average }}</p>
-        <p><strong>Network:</strong> {{ show.network.name }} ({{ show.network.country.name }})</p>
-      </div>
+      <figure v-if="show.image">
+        <img :src="show.image.original" alt="Show Image">
+      </figure>
+      <section>
+        <h1>{{ show.name }}</h1>
+        <div v-html="show.summary"></div>
+        <Rating :rating="show.rating" />
+        <ul>
+          <li><span>Language</span><span>{{ show.language }}</span></li>
+          <li><span>Status</span><span>{{ show.status }}</span></li>
+          <li><span>Runtime</span><span>{{ show.runtime }} minutes</span></li>
+          <li><span>Premiered</span><span>{{ show.premiered }}</span></li>
+          <li v-if="show.ended"><span>Ended</span><span>{{ show.ended }}</span></li>
+          <li><span>Schedule</span><span>{{ show.schedule.days.join(', ') }} at {{ show.schedule.time }}</span></li>
+          <li><span>Network</span><span>{{ show.network.name }} / {{ show.network.country.name }}</span></li>
+          <li><span>Genres</span><span>{{ show.genres.join(', ') }}</span></li>
+        </ul>
+      </section>
     </article>
   </section>
 </template>
 
 <style scoped>
-section {
-  article {
+.detail-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-px-30);
+
+  a {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    gap: 24px;
+    gap: var(--size-px-10);
+    color: var(--color-neutral-3);
+    font-weight: var(--font-bold);
+    text-decoration: none;
+    cursor: pointer;
 
-    img {
-      max-height: 360px;
+    svg {
+      width: var(--size-px-15);
+    }
+  }
+
+  article {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--size-px-80);
+
+    figure {
+      flex: 1 1 var(--size-pe-40);
+      display: flex;
+      overflow: hidden;
+      border-radius: var(--size-px-40);
+
+      img {
+        width: var(--size-pe-100);
+      }
     }
 
-    div {
-      width: 100%;
+    section {
+      flex: 1 1 var(--size-pe-60);
       display: flex;
       flex-direction: column;
-      gap: 10px;
 
-      a {
-        color: #e5e5e5;
-        cursor: pointer;
-        font-size: 1rem;
-        display: inline-block;
+      div {
+        margin-bottom: var(--size-px-20);
+        color: var(--color-neutral-3);
+      }
 
-        &:hover {
-          text-decoration: none;
+      .rating {
+        padding: var(--size-px-7) var(--size-px-15);
+        font-size: var(--font-size-16);
+      }
+
+      ul {
+        margin-top: var(--size-px-20);
+        color: var(--color-neutral-3);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--size-px-20);
+
+        li {
+          flex: 1 1 var(--size-pe-40);
+          display: flex;
+          flex-direction: column;
+
+          span:nth-of-type(2) {
+            font-size: var(--font-size-20);
+            color: var(--color-neutral-1);
+
+            @media (max-width: 37.5rem) {
+              font-size: var(--font-size-18);
+            }
+          }
         }
       }
     }
-  }
 
-  .back-button {
-    color: #e5e5e5;
-    cursor: pointer;
-    font-size: 1rem;
-    display: inline-block;
-    margin-bottom: 10px;
+    @media (max-width: 75rem) {
+      flex-direction: column-reverse;
+      gap: var(--size-px-50);
 
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
-
-@media (min-width: 480px) {
-  section {
-    article {
-      flex-direction: row;
-      flex-wrap: nowrap;
-
-      img {
-        width: 30%;
-        max-height: unset;
+      figure {
+        width: var(--size-pe-100);
       }
 
-      >div {
-        width: 70%;
+      section {
+        width: var(--size-pe-100);
       }
     }
   }
