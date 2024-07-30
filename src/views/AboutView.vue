@@ -26,21 +26,19 @@
 
     <h2>Notes</h2>
     <ul>
-      <li>Please keep in mind that we use VueJS in ABN AMRO. Preferably, you complete this assessment
-        using this framework.</li>
+      <li>Please keep in mind that we use VueJS. Preferably, you complete this assessment using this framework.</li>
       <li>Application must be responsive and mobile friendly</li>
-      <li>Please keep the leverage/use of scaffolding tools, boilerplate templates, plugins etc. to a minimum.
-        We don’t expect you to create things from scratch but, we also would like to see your own
-        creation</li>
-      <li>Please create a readme file that explains your architectural decisions (E.G. why did you choose a
-        specific framework) and make sure you include instructions on how to run your solution, add
-        details about NodeJS version being used and NPM.</li>
+      <li>Please keep the leverage/use of scaffolding tools, boilerplate templates, plugins etc. to a minimum. We don’t
+        expect you to create things from scratch but, we also would like to see your own creation</li>
+      <li>Please create a readme file that explains your architectural decisions (E.G. why did you choose a specific
+        framework) and make sure you include instructions on how to run your solution, add details about NodeJS version
+        being used and NPM.</li>
       <li>Please include unit tests</li>
       <li>Please check that application is running and there are no console errors before sending it to us</li>
       <li>Please make sure that the UI is simple yet eye-catching</li>
       <li>Please feel free to include more features other than the few mentioned above.</li>
-      <li>You may notice there is no endpoint in the TVMaze API that cleanly returns shows by genre. However, the
-        "Show index" endpoint should contain the data you need</li>
+      <li>You may notice there is no endpoint in the TVMaze API that cleanly returns shows by genre. However, the "Show
+        index" endpoint should contain the data you need</li>
     </ul>
   </section>
 </template>
