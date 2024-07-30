@@ -1,6 +1,6 @@
 # TV Shows
 
-Welcome to the TV Shows Dashboard project! This application aims to provide a comprehensive and user-friendly platform for browsing TV shows, categorized by genre and sorted by ratings. Whether you're a TV show enthusiast or just looking for something new to watch, this dashboard offers an intuitive interface to explore and discover TV shows.
+Welcome to the TV Shows project! This application aims to provide a comprehensive and user-friendly platform for browsing tv shows, categorized by genre and sorted by ratings. Whether you're a tv show enthusiast or just looking for something new to watch, this dashboard offers an intuitive interface to explore and discover tv shows.
 
 ## Architectural Decisions
 
@@ -39,7 +39,7 @@ To promote code reusability, four components were created:
 
 ### Testing
 
-I created essential unit tests to ensure adequate coverage and set up end-to-end tests using Cypress, including one small example.
+I created essential unit tests to ensure adequate coverage and setup of the end-to-end tests using Cypress, and including one small example.
 
 ## Prerequisites
 
