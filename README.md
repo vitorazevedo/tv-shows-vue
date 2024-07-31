@@ -4,7 +4,6 @@ Welcome to the TV Shows project! This application aims to provide a comprehensiv
 
 You can check the results of this project here: [https://tv-shows-vue.web.app/](https://tv-shows-vue.web.app/)
 
-
 ## Architectural Decisions
 
 ### Building from Scratch
