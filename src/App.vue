@@ -1,22 +1,19 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
 import { ref } from 'vue';
-import MenuIcon from '@/components/icons/menu.vue';
+import { RouterLink, RouterView } from 'vue-router';
 import CloseIcon from '@/components/icons/close.vue';
-
-const dynamicStyle = ref({ transform: '' });
-
-const toggleStyle = () => {
-  console.log('toggleStyle clicked');
-
-  if (dynamicStyle.value.transform) {
-    dynamicStyle.value = { transform: '' };
-  } else {
-    dynamicStyle.value = { transform: 'translateX(0)' };
-  }
-};
+import MenuIcon from '@/components/icons/menu.vue';
 
 const fullYear = new Date().getFullYear();
+const dynamicStyle = ref({ display: '' });
+
+const closeMenu = () => {
+  dynamicStyle.value = { display: '' };
+};
+
+const openMenu = () => {
+  dynamicStyle.value = { display: 'block' };
+};
 </script>
 
 <template>
@@ -24,15 +21,15 @@ const fullYear = new Date().getFullYear();
     <section>
       <RouterLink to="/"><img alt="TVScope Logo" src="@/assets/svg/logo.svg"></RouterLink>
       <aside :style="dynamicStyle">
-        <nav>
-          <RouterLink to="/" @click="toggleStyle">TV Shows</RouterLink>
-          <RouterLink to="/about" @click="toggleStyle">About</RouterLink>
-          <button @click="toggleStyle">
+        <nav @click="closeMenu">
+          <RouterLink to="/">TV Shows</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+          <button>
             <CloseIcon />
           </button>
         </nav>
       </aside>
-      <button @click="toggleStyle">
+      <button @click="openMenu">
         <MenuIcon />
       </button>
     </section>
@@ -69,8 +66,6 @@ header {
     }
 
     aside {
-      transition: transform 0.3s ease-in-out;
-
       nav {
         display: flex;
         align-items: center;
@@ -81,8 +76,8 @@ header {
     }
 
     button {
-      padding: var(--size-px-10);
       display: none;
+      padding: var(--size-px-10);
       color: inherit;
       border-radius: var(--size-px-10);
       background-color: rgba(0, 0, 0, 0.2);
@@ -94,7 +89,7 @@ header {
 
     @media (max-width: 37.5rem) {
       aside {
-        visibility: none;
+        display: none;
         width: var(--size-pe-100);
         height: var(--size-pe-100);
         padding: var(--size-px-80) var(--size-px-40);
@@ -102,7 +97,6 @@ header {
         top: 0;
         right: 0;
         z-index: var(--index-10);
-        transform: translateX(var(--size-pe-100));
         background-color: var(--color-primary-dark);
 
         nav {
@@ -119,10 +113,6 @@ header {
             z-index: var(--index-1);
           }
         }
-
-        /* visibility: visible; */
-        /* display: block; */
-        /* transform: translateX(0); */
       }
 
       button {
