@@ -16,7 +16,7 @@ defineProps<{
     <RouterLink :to="`/detail/${show.id}`">
       <figure>
         <div>
-          <img v-if="show.image" :src="show.image.medium" alt="Show Image">
+          <img v-if="show.image" :src="show.image.medium" loading="lazy" alt="Show Image">
           <img v-if="!show.image" src="@/assets/svg/logo.svg" alt="No Image" class="image-placeholder">
         </div>
         <figcaption>{{ show.name }}</figcaption>

@@ -25,7 +25,7 @@ onMounted(() => {
     </RouterLink>
     <article>
       <figure v-if="show.image">
-        <img :src="show.image.original" alt="Show Image">
+        <img :src="show.image.original" loading="lazy" alt="Show Image">
       </figure>
       <section>
         <h1>{{ show.name }}</h1>
