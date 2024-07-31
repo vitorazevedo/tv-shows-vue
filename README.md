@@ -1,6 +1,9 @@
 # TV Shows
 
-Welcome to the TV Shows project! This application aims to provide a comprehensive and user-friendly platform for browsing tv shows, categorized by genre and sorted by ratings. Whether you're a tv show enthusiast or just looking for something new to watch, this dashboard offers an intuitive interface to explore and discover tv shows.
+Welcome to the TV Shows project! This application aims to provide a comprehensive and user-friendly platform for browsing tv shows, categorized by genre and sorted by ratings. Whether you're a tv show enthusiast or just looking for something new to watch, this dashboard offers an intuitive interface to explore and discover tv shows.  
+
+You can check the results of this project here: [https://tv-shows-vue.web.app/](https://tv-shows-vue.web.app/)
+
 
 ## Architectural Decisions
 
