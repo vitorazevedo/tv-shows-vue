@@ -1,21 +1,37 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
+import CloseIcon from '@/components/icons/close.vue';
 import MenuIcon from '@/components/icons/menu.vue';
 
 const fullYear = new Date().getFullYear();
+const dynamicStyle = ref({ display: '' });
+
+const closeMenu = () => {
+  dynamicStyle.value = { display: '' };
+};
+
+const openMenu = () => {
+  dynamicStyle.value = { display: 'block' };
+};
 </script>
 
 <template>
   <header>
     <section>
       <RouterLink to="/"><img alt="TVScope Logo" src="@/assets/svg/logo.svg"></RouterLink>
-      <nav>
-        <RouterLink to="/">TV Shows</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <button>
-          <MenuIcon />
-        </button>
-      </nav>
+      <aside :style="dynamicStyle">
+        <nav @click="closeMenu">
+          <RouterLink to="/">TV Shows</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+          <button>
+            <CloseIcon />
+          </button>
+        </nav>
+      </aside>
+      <button @click="openMenu">
+        <MenuIcon />
+      </button>
     </section>
   </header>
   <main>
@@ -49,37 +65,61 @@ header {
       width: var(--size-px-40);
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: var(--size-px-20);
-      color: var(--color-neutral-3);
-      font-weight: var(--font-bold);
+    aside {
+      nav {
+        display: flex;
+        align-items: center;
+        gap: var(--size-px-20);
+        color: var(--color-neutral-3);
+        font-weight: var(--font-bold);
+      }
+    }
 
-      button {
-        padding: var(--size-px-10);
+    button {
+      display: none;
+      padding: var(--size-px-10);
+      color: inherit;
+      border-radius: var(--size-px-10);
+      background-color: rgba(0, 0, 0, 0.2);
+
+      svg {
+        width: var(--size-px-20);
+      }
+    }
+
+    @media (max-width: 37.5rem) {
+      aside {
         display: none;
-        color: inherit;
-        border-radius: var(--size-px-10);
-        background-color: rgba(0, 0, 0, 0.2);
+        width: var(--size-pe-100);
+        height: var(--size-pe-100);
+        padding: var(--size-px-80) var(--size-px-40);
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: var(--index-10);
+        background-color: var(--color-primary-dark);
 
-        svg {
-          width: var(--size-px-20);
+        nav {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          font-size: var(--font-size-20);
+
+          button {
+            color: var(--color-white-dark);
+            position: absolute;
+            top: var(--size-px-22);
+            right: var(--size-px-20);
+            z-index: var(--index-1);
+          }
         }
       }
 
-      @media (max-width: 37.5rem) {
-        a {
-          display: none;
-        }
-
-        button {
-          display: flex;
-        }
+      button {
+        display: flex;
       }
     }
   }
-
 }
 
 main {
