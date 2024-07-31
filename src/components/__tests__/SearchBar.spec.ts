@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import SearchBarComponent from '@/components/SearchBar.vue';
 import SearchIcon from '@/components/icons/search.vue';
 
-// Define the type for your component's instance
+// Define the type for the component's instance
 interface SearchBarComponentInstance {
   query: string;
 }
@@ -11,6 +11,7 @@ interface SearchBarComponentInstance {
 describe('SearchBarComponent', () => {
   it('renders the SearchIcon component', () => {
     const wrapper = mount(SearchBarComponent);
+
     const searchIcon = wrapper.findComponent(SearchIcon);
 
     expect(searchIcon.exists()).toBe(true);
@@ -18,6 +19,7 @@ describe('SearchBarComponent', () => {
 
   it('renders the input and button elements', () => {
     const wrapper = mount(SearchBarComponent);
+
     const input = wrapper.find('input');
     const button = wrapper.find('button');
 
@@ -27,6 +29,7 @@ describe('SearchBarComponent', () => {
 
   it('updates the query when typing in the input', async () => {
     const wrapper = mount<SearchBarComponentInstance>(SearchBarComponent as unknown as SearchBarComponentInstance);
+
     const input = wrapper.find('input');
     await input.setValue('test query');
 
@@ -48,6 +51,7 @@ describe('SearchBarComponent', () => {
 
   it('emits a search event with the query value when enter is pressed in the input', async () => {
     const wrapper = mount<typeof SearchBarComponent, SearchBarComponentInstance>(SearchBarComponent);
+
     const input = wrapper.find('input');
     await input.setValue('test query');
     await input.trigger('keyup.enter');

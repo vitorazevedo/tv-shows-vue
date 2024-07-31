@@ -1,25 +1,15 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, vi } from 'vitest';
-import DetailViewComponent from '@/views/DetailView.vue';
-import ArrowIcon from '@/components/icons/arrow.vue';
+import { describe, expect, it, vi } from 'vitest';
+import { RouterLink } from 'vue-router';
 import Rating from '@/components/Rating.vue';
-import { createRouter, createWebHistory, RouterLink } from 'vue-router';
+import ArrowIcon from '@/components/icons/arrow.vue';
+import DetailViewComponent from '@/views/DetailView.vue';
+import { router } from './test.setup';
 
-const mockRoutes = [
-  {
-    path: '/detail/:id',
-    name: 'Detail',
-    component: DetailViewComponent,
-  },
-];
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: mockRoutes,
-});
-
+// Mock the global fetch function
 global.fetch = vi.fn();
 
+// Define the type for the component's instance
 interface DetailViewInstance {
   show: { id: number; name: string; genres: string[] };
 }
@@ -49,12 +39,7 @@ describe('DetailViewComponent', () => {
     router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance, {
-      global: {
-        plugins: [router],
-        components: { RouterLink },
-      },
-    });
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
@@ -86,17 +71,13 @@ describe('DetailViewComponent', () => {
     router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount(DetailViewComponent, {
-      global: {
-        plugins: [router],
-        components: { RouterLink },
-      },
-    });
+    const wrapper = mount(DetailViewComponent);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
     const arrowIcon = wrapper.findComponent(ArrowIcon);
     expect(arrowIcon.exists()).toBe(true);
+
     const backLink = wrapper.findComponent(RouterLink);
     expect(backLink.exists()).toBe(true);
     expect(backLink.props().to).toBe('/');
@@ -123,15 +104,7 @@ describe('DetailViewComponent', () => {
       json: async () => mockShow,
     });
 
-    router.push('/1');
-    await router.isReady();
-
-    const wrapper = mount(DetailViewComponent, {
-      global: {
-        plugins: [router],
-        components: { RouterLink },
-      },
-    });
+    const wrapper = mount(DetailViewComponent);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 

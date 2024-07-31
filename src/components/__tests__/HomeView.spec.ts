@@ -1,16 +1,17 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, vi } from 'vitest';
-import HomeView from '@/views/HomeView.vue';
-import SearchBar from '@/components/SearchBar.vue';
+import { describe, expect, it, vi } from 'vitest';
 import GenreList from '@/components/GenreList.vue';
+import SearchBar from '@/components/SearchBar.vue';
+import HomeView from '@/views/HomeView.vue';
+import { router } from './test.setup';
 
 // Mock the global fetch function
 global.fetch = vi.fn();
 
-// Define the type for your component's instance
+// Define the type for the component's instance
 interface HomeViewInstance {
-  shows: Array<{ id: number; name: string; genres: string[] }>;
-  searchResults: Array<{ id: number; name: string; genres: string[] }>;
+  shows: Array<{ id: number; name: string; genres: string[]; rating: { average: number } }>;
+  searchResults: Array<{ id: number; name: string; genres: string[]; rating: { average: number } }>;
   genres: string[];
 }
 
@@ -36,8 +37,10 @@ function createMockResponse(data: any): Response {
 }
 
 describe('HomeView', () => {
+  router.push({ name: 'Home' });
+
   it('renders the welcome message and SearchBar component', () => {
-    const mockShowsEndpoint = [{ id: 1, name: 'Search Show 1', genres: ['Drama'] }];
+    const mockShowsEndpoint = [{ id: 1, name: 'Search Show 1', genres: ['Drama'], rating: { average: 6 } }];
     const fetchSpy = vi.spyOn(global, 'fetch');
 
     fetchSpy.mockResolvedValueOnce(createMockResponse(mockShowsEndpoint));
@@ -50,8 +53,8 @@ describe('HomeView', () => {
 
   it('fetches shows and updates genres on mount', async () => {
     const mockShows = [
-      { id: 1, name: 'Show 1', genres: ['Drama'] },
-      { id: 2, name: 'Show 2', genres: ['Comedy'] },
+      { id: 1, name: 'Show 1', genres: ['Drama'], rating: { average: 6 } },
+      { id: 2, name: 'Show 2', genres: ['Comedy'], rating: { average: 6 } },
     ];
     (fetch as any).mockResolvedValueOnce(createMockResponse(mockShows));
 
@@ -65,8 +68,8 @@ describe('HomeView', () => {
   });
 
   it('searches shows and updates searchResults with multiple fetch calls', async () => {
-    const mockShowsEndpoint = [{ id: 1, name: 'Search Show 1', genres: ['Drama'] }];
-    const mockSearchEndpoint = [{ show: { id: 2, name: 'Search Show 2', genres: ['Comedy'] } }];
+    const mockShowsEndpoint = [{ id: 1, name: 'Search Show 1', genres: ['Drama'], rating: { average: 6 } }];
+    const mockSearchEndpoint = [{ show: { id: 2, name: 'Search Show 2', genres: ['Comedy'], rating: { average: 6 } } }];
 
     const fetchSpy = vi.spyOn(global, 'fetch');
 
@@ -91,8 +94,8 @@ describe('HomeView', () => {
 
   it('renders GenreList components for each genre', async () => {
     const mockShows = [
-      { id: 1, name: 'Show 1', genres: ['Drama'] },
-      { id: 2, name: 'Show 2', genres: ['Comedy'] },
+      { id: 1, name: 'Show 1', genres: ['Drama'], rating: { average: 6 } },
+      { id: 2, name: 'Show 2', genres: ['Comedy'], rating: { average: 6 } },
     ];
     (fetch as any).mockResolvedValueOnce(createMockResponse(mockShows));
 

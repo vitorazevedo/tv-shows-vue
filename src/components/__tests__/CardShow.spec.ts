@@ -1,20 +1,15 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect } from 'vitest';
-import { createRouter, createWebHistory, RouterLink } from 'vue-router';
+import { describe, expect, it } from 'vitest';
+import { RouterLink } from 'vue-router';
 import CardShowComponent from '@/components/CardShow.vue';
 import Rating from '@/components/Rating.vue';
+import { router } from './test.setup';
 
-// Mock router setup
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [{ path: '/detail/:id', component: { template: '<div>Detail Page</div>' } }],
-});
+router.push({ name: 'Home' });
+await router.isReady();
 
 describe('CardShowComponent', () => {
-  it('renders the RouterLink with the correct "to" attribute', async () => {
-    router.push('/');
-    await router.isReady();
-
+  it('renders the RouterLink with the correct "to" attribute', () => {
     const show = {
       id: 1,
       image: { medium: 'http://example.com/image.jpg' },
@@ -23,10 +18,6 @@ describe('CardShowComponent', () => {
     };
 
     const wrapper = mount(CardShowComponent, {
-      global: {
-        plugins: [router],
-        components: { RouterLink },
-      },
       props: {
         show,
       },
