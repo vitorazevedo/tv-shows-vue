@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { RouterLink } from 'vue-router';
 import CardShowComponent from '@/components/CardShow.vue';
 import Rating from '@/components/Rating.vue';
-import { router } from './test.setup';
+import { router } from '@/mocks/router.setup';
 
 router.push({ name: 'Home' });
 await router.isReady();

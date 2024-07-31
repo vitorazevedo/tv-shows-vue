@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import GenreListComponent from '@/components/GenreList.vue';
 import CardShow from '@/components/CardShow.vue';
-import { router } from './test.setup';
+import { router } from '@/mocks/router.setup';
 
 router.push({ name: 'Home' });
 await router.isReady();

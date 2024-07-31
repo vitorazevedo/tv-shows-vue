@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import GenreList from '@/components/GenreList.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import HomeView from '@/views/HomeView.vue';
-import { router } from './test.setup';
+import { router } from '@/mocks/router.setup';
 
 // Mock the global fetch function
 global.fetch = vi.fn();

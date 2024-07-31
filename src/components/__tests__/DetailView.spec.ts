@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router';
 import Rating from '@/components/Rating.vue';
 import ArrowIcon from '@/components/icons/arrow.vue';
 import DetailViewComponent from '@/views/DetailView.vue';
-import { router } from './test.setup';
+import { router } from '@/mocks/router.setup';
 
 // Mock the global fetch function
 global.fetch = vi.fn();
