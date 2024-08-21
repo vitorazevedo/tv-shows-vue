@@ -22,8 +22,10 @@ const searchShows = async (query: string) => {
     const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
     const data = await response.json();
     searchResults.value = data.map((result: any) => result.show);
+    genres.value = ['Search Result'];
   } else {
     searchResults.value = [];
+    genres.value = extractGenres(shows.value);
   }
 };
 
@@ -38,6 +40,9 @@ const extractGenres = (shows: any[]) => {
 };
 
 const filteredShowsByGenre = (genre: string) => {
+  if (genre === 'Search Result') {
+    return searchResults.value;
+  }
   return displayedShows.value.filter(show => show.genres.includes(genre));
 };
 
