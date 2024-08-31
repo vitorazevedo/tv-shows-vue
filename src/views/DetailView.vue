@@ -1,16 +1,49 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
+
 import ArrowIcon from '@/components/icons/arrow.vue';
 import Rating from '@/components/Rating.vue';
 
-const route = useRoute();
-const show = ref<any>(null);
+import type { Show, ShowResponse } from '@/types/interfaces';
 
-async function fetchShow() {
-  const response = await fetch(`https://api.tvmaze.com/shows/${route.params.id}`);
-  const data = await response.json();
-  show.value = data;
+const route = useRoute();
+const show = ref<Show>();
+
+async function fetchShow(): Promise<void> {
+  try {
+    const response = await fetch(`https://api.tvmaze.com/shows/${route.params.id}`);
+    const data: ShowResponse = await response.json();
+
+    const details: Show = {
+      name: data.name ?? 'N/A',
+      summary: data.summary ?? 'No summary available.',
+      image: data.image ?? null,
+      rating: data.rating ?? { average: null },
+      info: [],
+    };
+
+    const extra: [string, string | undefined][] = [
+      ['Language', data.language],
+      ['Status', data.status],
+      ['Runtime', data.runtime ? `${data.runtime} minutes` : undefined],
+      ['Premiered', data.premiered],
+      ['Ended', data.ended],
+      ['Schedule', data.schedule?.days && data.schedule.time ? `${data.schedule.days.join(', ')} at ${data.schedule.time}` : undefined],
+      ['Network', data.network?.name && data.network?.country?.name ? `${data.network.name} / ${data.network.country.name}` : undefined],
+      ['Genres', data.genres?.length ? data.genres.join(', ') : undefined],
+    ];
+
+    extra.forEach(([label, value]) => {
+      if (value) {
+        details.info.push({ label, value });
+      }
+    });
+
+    show.value = details;
+  } catch (error) {
+    console.error('Failed to fetch show data:', error);
+  }
 }
 
 onMounted(() => {
@@ -30,16 +63,11 @@ onMounted(() => {
       <section>
         <h1>{{ show.name }}</h1>
         <div v-html="show.summary"></div>
-        <Rating :rating="show.rating" />
-        <ul>
-          <li><span>Language</span><span>{{ show.language }}</span></li>
-          <li><span>Status</span><span>{{ show.status }}</span></li>
-          <li><span>Runtime</span><span>{{ show.runtime }} minutes</span></li>
-          <li><span>Premiered</span><span>{{ show.premiered }}</span></li>
-          <li v-if="show.ended"><span>Ended</span><span>{{ show.ended }}</span></li>
-          <li><span>Schedule</span><span>{{ show.schedule.days.join(', ') }} at {{ show.schedule.time }}</span></li>
-          <li><span>Network</span><span>{{ show.network.name }} / {{ show.network.country.name }}</span></li>
-          <li><span>Genres</span><span>{{ show.genres.join(', ') }}</span></li>
+        <Rating v-if="show.rating.average" :rating="show.rating" />
+        <ul v-if="show.info.length">
+          <li v-for="(info, index) in show.info" :key="index">
+            <span>{{ info.label }}</span><span>{{ info.value }}</span>
+          </li>
         </ul>
       </section>
     </article>

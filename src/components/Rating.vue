@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import StarIcon from '@/components/icons/star.vue';
+import type { Rating } from '@/types/interfaces';
 
 defineProps<{
-  rating: {
-    average: number;
-  };
+  rating: Rating;
 }>()
 </script>
 
