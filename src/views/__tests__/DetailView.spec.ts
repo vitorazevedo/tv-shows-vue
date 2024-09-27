@@ -7,10 +7,16 @@ import Rating from '@/components/Rating.vue';
 import ArrowIcon from '@/components/icons/arrow.vue';
 
 import DetailViewComponent from '@/views/DetailView.vue';
+
 import type { Show, ShowResponse } from '@/types/interfaces';
 
 // Mock the global fetch function
 global.fetch = vi.fn();
+
+// Define the type for the component's instance
+interface DetailViewInstance {
+  show: Show;
+}
 
 describe('DetailViewComponent', () => {
   // Mock the show data
@@ -53,7 +59,7 @@ describe('DetailViewComponent', () => {
     router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount(DetailViewComponent);
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
@@ -69,7 +75,7 @@ describe('DetailViewComponent', () => {
     router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount(DetailViewComponent);
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
@@ -86,7 +92,7 @@ describe('DetailViewComponent', () => {
       json: async () => mockShow,
     });
 
-    const wrapper = mount(DetailViewComponent);
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
@@ -128,7 +134,7 @@ describe('DetailViewComponent', () => {
       json: () => mockIncompleteShow,
     });
 
-    const wrapper = mount(DetailViewComponent);
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
@@ -147,12 +153,12 @@ describe('DetailViewComponent', () => {
     // Mock a network error
     (fetch as any).mockRejectedValueOnce(new Error('Network error'));
 
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
 
     router.push({ name: 'Detail', params: { id: '1' } });
     await router.isReady();
 
-    const wrapper = mount(DetailViewComponent);
+    const wrapper = mount<DetailViewInstance>(DetailViewComponent as unknown as DetailViewInstance);
 
     await new Promise(process.nextTick); // Wait for the fetch to resolve
 
